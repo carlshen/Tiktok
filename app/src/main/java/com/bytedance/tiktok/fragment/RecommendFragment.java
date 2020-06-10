@@ -1,22 +1,26 @@
 package com.bytedance.tiktok.fragment;
 
+import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.bytedance.tiktok.R;
-import com.bytedance.tiktok.activity.MainActivity;
 import com.bytedance.tiktok.activity.PlayListActivity;
 import com.bytedance.tiktok.adapter.VideoAdapter;
-import com.bytedance.tiktok.base.BaseFragment;
 import com.bytedance.tiktok.bean.CurUserBean;
 import com.bytedance.tiktok.bean.DataCreate;
 import com.bytedance.tiktok.bean.MainPageChangeEvent;
 import com.bytedance.tiktok.bean.PauseVideoEvent;
+import com.bytedance.tiktok.databinding.FragmentRecommendBinding;
+import com.bytedance.tiktok.project.BaseFragment;
 import com.bytedance.tiktok.utils.OnVideoControllerListener;
-import com.bytedance.tiktok.utils.RxBus;
 import com.bytedance.tiktok.view.CommentDialog;
 import com.bytedance.tiktok.view.ControllerView;
 import com.bytedance.tiktok.view.FullScreenVideoView;
@@ -24,34 +28,37 @@ import com.bytedance.tiktok.view.LikeView;
 import com.bytedance.tiktok.view.ShareDialog;
 import com.bytedance.tiktok.view.viewpagerlayoutmanager.OnViewPagerListener;
 import com.bytedance.tiktok.view.viewpagerlayoutmanager.ViewPagerLayoutManager;
-import butterknife.BindView;
+
 import rx.functions.Action1;
 
 /**
- * create by libo
+ * create by carl shen
  * create on 2020-05-19
  * description 推荐播放页
  */
 public class RecommendFragment extends BaseFragment {
-    @BindView(R.id.recyclerview)
-    RecyclerView recyclerView;
+    private FragmentRecommendBinding binding;
+    private RecyclerView recyclerView;
     private VideoAdapter adapter;
     private ViewPagerLayoutManager viewPagerLayoutManager;
     /** 当前播放视频位置 */
     private int curPlayPos = -1;
     private FullScreenVideoView videoView;
-    @BindView(R.id.refreshlayout)
-    SwipeRefreshLayout refreshLayout;
+    private SwipeRefreshLayout refreshLayout;
     private ImageView ivCurCover;
 
-    @Override
-    protected int setLayoutId() {
-        return R.layout.fragment_recommend;
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_recommend, container, false);
+        showActionBar();
+        binding = FragmentRecommendBinding.bind(root);
+
+        init();
+        return root;
     }
 
-    @Override
     protected void init() {
-
+        refreshLayout = binding.refreshlayout;
+        recyclerView = binding.recyclerview;
         adapter = new VideoAdapter(getActivity(), DataCreate.datas);
         recyclerView.setAdapter(adapter);
 
@@ -62,14 +69,14 @@ public class RecommendFragment extends BaseFragment {
         setRefreshEvent();
 
         //监听播放或暂停事件
-        RxBus.getDefault().toObservable(PauseVideoEvent.class)
-            .subscribe((Action1<PauseVideoEvent>) event -> {
-                if (event.isPlayOrPause()) {
-                    videoView.start();
-                } else {
-                    videoView.pause();
-                }
-            });
+//        RxBus.getDefault().toObservable(PauseVideoEvent.class)
+//            .subscribe((Action1<PauseVideoEvent>) event -> {
+//                if (event.isPlayOrPause()) {
+//                    videoView.start();
+//                } else {
+//                    videoView.pause();
+//                }
+//            });
 
     }
 
@@ -169,7 +176,7 @@ public class RecommendFragment extends BaseFragment {
         likeShareEvent(controllerView);
 
         //切换播放视频的作者主页数据
-        RxBus.getDefault().post(new CurUserBean(DataCreate.datas.get(position).getUserBean()));
+//        RxBus.getDefault().post(new CurUserBean(DataCreate.datas.get(position).getUserBean()));
 
         curPlayPos = position;
 
@@ -224,7 +231,7 @@ public class RecommendFragment extends BaseFragment {
         controllerView.setListener(new OnVideoControllerListener() {
             @Override
             public void onHeadClick() {
-                RxBus.getDefault().post(new MainPageChangeEvent(1));
+//                RxBus.getDefault().post(new MainPageChangeEvent(1));
             }
 
             @Override

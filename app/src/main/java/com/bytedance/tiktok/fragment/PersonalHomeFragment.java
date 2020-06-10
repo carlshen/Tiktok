@@ -1,109 +1,148 @@
 package com.bytedance.tiktok.fragment;
 
 import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.androidkun.xtablayout.XTabLayout;
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.activity.FocusActivity;
 import com.bytedance.tiktok.activity.ShowImageActivity;
-import com.bytedance.tiktok.base.BaseFragment;
 import com.bytedance.tiktok.base.CommPagerAdapter;
 import com.bytedance.tiktok.bean.CurUserBean;
-import com.bytedance.tiktok.bean.MainPageChangeEvent;
 import com.bytedance.tiktok.bean.VideoBean;
+import com.bytedance.tiktok.databinding.FragmentPersonalHomeBinding;
+import com.bytedance.tiktok.project.BaseFragment;
+import com.bytedance.tiktok.project.HomeViewModel;
+import com.bytedance.tiktok.project.RequestHomeViewModel;
 import com.bytedance.tiktok.utils.NumUtils;
-import com.bytedance.tiktok.utils.RxBus;
 import com.bytedance.tiktok.view.CircleImageView;
 import com.bytedance.tiktok.view.IconFontTextView;
 import com.google.android.material.appbar.AppBarLayout;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import rx.Subscription;
-import rx.functions.Action1;
-
 /**
- * create by libo
+ * create by carl shen
  * create on 2020-05-19
  * description 个人主页fragment
  */
-public class PersonalHomeFragment extends BaseFragment implements View.OnClickListener {
-    @BindView(R.id.iv_bg)
+public class PersonalHomeFragment extends BaseFragment {
+    private FragmentPersonalHomeBinding binding;
+    private HomeViewModel homeViewModel;
+    private RequestHomeViewModel requestHomeViewModel;
     ImageView ivBg;
-    @BindView(R.id.iv_head)
     CircleImageView ivHead;
-    @BindView(R.id.rl_dropdown)
     RelativeLayout rlDropdown;
-    @BindView(R.id.ll_focus)
     LinearLayout llFocus;
-    @BindView(R.id.ll_fans)
     LinearLayout llFans;
-    @BindView(R.id.iv_return)
     ImageView ivReturn;
-    @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.tv_focus)
     TextView tvFocus;
-    @BindView(R.id.iv_more)
     IconFontTextView ivMore;
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.tablayout)
     XTabLayout tabLayout;
-    @BindView(R.id.appbarlayout)
     AppBarLayout appBarLayout;
-    @BindView(R.id.viewpager)
     ViewPager viewPager;
-    @BindView(R.id.tv_nickname)
     TextView tvNickname;
-    @BindView(R.id.tv_sign)
     TextView tvSign;
-    @BindView(R.id.tv_getlike_count)
     TextView tvGetLikeCount;
-    @BindView(R.id.tv_focus_count)
     TextView tvFocusCount;
-    @BindView(R.id.tv_fans_count)
     TextView tvFansCount;
-    @BindView(R.id.tv_addfocus)
     TextView tvAddfocus;
     private ArrayList<Fragment> fragments = new ArrayList<>();
     private CommPagerAdapter pagerAdapter;
-    private VideoBean.UserBean curUserBean;
-    private Subscription subscription;
+    private VideoBean.UserBean cUserBean = new VideoBean.UserBean();
+//    private Subscription subscription;
 
-    @Override
-    protected int setLayoutId() {
-        return R.layout.fragment_personal_home;
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        requestHomeViewModel = new ViewModelProvider(this).get(RequestHomeViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_personal_home, container, false);
+        showActionBar();
+        binding = FragmentPersonalHomeBinding.bind(root);
+        binding.setVm(homeViewModel);
+        binding.setClick(new ProxyClick());
+
+        init();
+        return root;
     }
 
-    @Override
     protected void init() {
-
+        ivBg = binding.ivBg;
+        ivHead = binding.ivHead;
+        rlDropdown = binding.rlDropdown;
+        llFocus = binding.llFocus;
+        llFans = binding.llFans;
+        ivReturn = binding.ivReturn;
+        tvTitle = binding.tvTitle;
+        tvFocus = binding.tvFocus;
+        ivMore = binding.ivMore;
+        toolbar = binding.toolbar;
+        tabLayout = binding.tablayout;
+        appBarLayout = binding.appbarlayout;
+        viewPager = binding.viewpager;
+        tvNickname = binding.tvNickname;
+        tvSign = binding.tvSign;
+        tvGetLikeCount = binding.tvGetlikeCount;
+        tvFocusCount = binding.tvFocusCount;
+        tvFansCount = binding.tvFansCount;
+        tvAddfocus = binding.tvAddfocus;
         //解决toolbar左边距问题
         toolbar.setContentInsetsAbsolute(0, 0);
 
         setAppbarLayoutPercent();
 
-        ivReturn.setOnClickListener(this);
-        ivHead.setOnClickListener(this);
-        ivBg.setOnClickListener(this);
-        llFocus.setOnClickListener(this);
-        llFans.setOnClickListener(this);
+//        ivReturn.setOnClickListener(this);
+//        ivHead.setOnClickListener(this);
+//        ivBg.setOnClickListener(this);
+//        llFocus.setOnClickListener(this);
+//        llFans.setOnClickListener(this);
 
+        setTabLayout();
         setUserInfo();
+    }
+
+    // 必须写成public
+    public class ProxyClick {
+
+        public void toLinkReturn() {
+            Toast.makeText(mActivity, "即将发起进入跳转动作1...", Toast.LENGTH_SHORT).show();
+//            RxBus.getDefault().post(new MainPageChangeEvent(0));
+        }
+
+        public void toLinkHead() {
+            Toast.makeText(mActivity, "即将发起进入跳转动作2...", Toast.LENGTH_SHORT).show();
+            transitionAnim(ivHead, cUserBean.getHead());
+        }
+
+        public void toLinkFocus() {
+            Toast.makeText(mActivity, "即将发起进入跳转动作3...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), FocusActivity.class));
+        }
+
+        public void toLinkFans() {
+            Toast.makeText(mActivity, "即将发起进入跳转动作4...", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), FocusActivity.class));
+        }
+
     }
 
     /**
@@ -119,42 +158,60 @@ public class PersonalHomeFragment extends BaseFragment implements View.OnClickLi
     }
 
     public void setUserInfo() {
-        subscription = RxBus.getDefault().toObservable(CurUserBean.class).subscribe((Action1<CurUserBean>) curUserBean -> {
+        // 观察数据的变化 ==== 变化到界面中去
+        requestHomeViewModel.getHomeDataResultMutableLiveData().observe(getViewLifecycleOwner(), new Observer<CurUserBean>() {
+            @Override
+            public void onChanged(CurUserBean curUserBean) {
 
-            coordinatorLayoutBackTop();
+                coordinatorLayoutBackTop();
+                cUserBean = curUserBean.getUserBean();
 
-            this.curUserBean = curUserBean.getUserBean();
+                ivBg.setImageResource(curUserBean.getUserBean().getHead());
+                ivHead.setImageResource(curUserBean.getUserBean().getHead());
+                tvNickname.setText(curUserBean.getUserBean().getNickName());
+                tvSign.setText(curUserBean.getUserBean().getSign());
+                tvTitle.setText(curUserBean.getUserBean().getNickName());
 
-            ivBg.setImageResource(curUserBean.getUserBean().getHead());
-            ivHead.setImageResource(curUserBean.getUserBean().getHead());
-            tvNickname.setText(curUserBean.getUserBean().getNickName());
-            tvSign.setText(curUserBean.getUserBean().getSign());
-            tvTitle.setText(curUserBean.getUserBean().getNickName());
+                String subCount = NumUtils.numberFilter(curUserBean.getUserBean().getSubCount());
+                String focusCount = NumUtils.numberFilter(curUserBean.getUserBean().getFocusCount());
+                String fansCount = NumUtils.numberFilter(curUserBean.getUserBean().getFansCount());
 
-            String subCount = NumUtils.numberFilter(curUserBean.getUserBean().getSubCount());
-            String focusCount = NumUtils.numberFilter(curUserBean.getUserBean().getFocusCount());
-            String fansCount = NumUtils.numberFilter(curUserBean.getUserBean().getFansCount());
+                //获赞 关注 粉丝
+                tvGetLikeCount.setText(subCount);
+                tvFocusCount.setText(focusCount);
+                tvFansCount.setText(fansCount);
 
-            //获赞 关注 粉丝
-            tvGetLikeCount.setText(subCount);
-            tvFocusCount.setText(focusCount);
-            tvFansCount.setText(fansCount);
+                //关注状态
+                if (curUserBean.getUserBean().isFocused()) {
+                    tvAddfocus.setText("已关注");
+                    tvAddfocus.setBackgroundResource(R.drawable.shape_round_halfwhite);
+                } else {
+                    tvAddfocus.setText("关注");
+                    tvAddfocus.setBackgroundResource(R.drawable.shape_round_red);
+                }
 
-            //关注状态
-            if (curUserBean.getUserBean().isFocused()) {
-                tvAddfocus.setText("已关注");
-                tvAddfocus.setBackgroundResource(R.drawable.shape_round_halfwhite);
-            } else {
-                tvAddfocus.setText("关注");
-                tvAddfocus.setBackgroundResource(R.drawable.shape_round_red);
+                setTabLayout();
+//                String imagePath1 = CurUserBean.getData().getCompany_list().get(0).getImage();
+//                homeViewModel.getImageURL1().setValue(imagePath1);
+//
+//                String imagePath2 = homeDataResult.getData().getAd_list().get(0).getImage();
+//                homeViewModel.getImageURL2().setValue(imagePath2);
+//
+//                String linkPath1 = homeDataResult.getData().getCompany_list().get(0).getLink();
+//                homeViewModel.getLinkURL1().setValue(linkPath1);
+//
+//                String linkPath2 = homeDataResult.getData().getAd_list().get(0).getLink();
+//                homeViewModel.getLinkURL2().setValue(linkPath2);
+
             }
-
-            setTabLayout();
         });
+
+        // 触发一次
+        requestHomeViewModel.touchOffHomeData();
     }
 
     private void setTabLayout() {
-        String[] titles = new String[]{"作品 " + curUserBean.getWorkCount(), "动态 " + curUserBean.getDynamicCount(), "喜欢 " + curUserBean.getLikeCount()};
+        String[] titles = new String[]{"作品 " + cUserBean.getWorkCount(), "动态 " + cUserBean.getDynamicCount(), "喜欢 " + cUserBean.getLikeCount()};
 
         fragments.clear();
         for (int i = 0; i < titles.length; i++) {
@@ -203,33 +260,33 @@ public class PersonalHomeFragment extends BaseFragment implements View.OnClickLi
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.iv_return:
-                RxBus.getDefault().post(new MainPageChangeEvent(0));
-                break;
-            case R.id.iv_head:
-                transitionAnim(ivHead, curUserBean.getHead());
-                break;
-            case R.id.iv_bg:
-
-                break;
-            case R.id.ll_focus:
-                startActivity(new Intent(getActivity(), FocusActivity.class));
-                break;
-            case R.id.ll_fans:
-                startActivity(new Intent(getActivity(), FocusActivity.class));
-                break;
-        }
-    }
+//    @Override
+//    public void onClick(View v) {
+//        switch (v.getId()) {
+//            case R.id.iv_return:
+//                RxBus.getDefault().post(new MainPageChangeEvent(0));
+//                break;
+//            case R.id.iv_head:
+//                transitionAnim(ivHead, curUserBean.getHead());
+//                break;
+//            case R.id.iv_bg:
+//
+//                break;
+//            case R.id.ll_focus:
+//                startActivity(new Intent(getActivity(), FocusActivity.class));
+//                break;
+//            case R.id.ll_fans:
+//                startActivity(new Intent(getActivity(), FocusActivity.class));
+//                break;
+//        }
+//    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
-        if (subscription != null) {
-            subscription.unsubscribe();
-        }
+//
+//        if (subscription != null) {
+//            subscription.unsubscribe();
+//        }
     }
 }
