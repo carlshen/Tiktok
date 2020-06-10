@@ -65,6 +65,8 @@ dependencies {
     implementation 'com.airbnb.android:lottie:2.8.0'
 
     implementation project(":common")
+    implementation 'androidx.navigation:navigation-fragment:2.2.2'
+    implementation 'androidx.navigation:navigation-ui:2.2.2'
     compileOnly 'androidx.lifecycle:lifecycle-runtime:2.2.0'
     compileOnly 'androidx.lifecycle:lifecycle-common-java8:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'

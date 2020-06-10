@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.bytedance.tiktok.fragment.CurrentLocationFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_current_location" />
+
+    <fragment
+        android:id="@+id/navigation_recommend"
+        android:name="com.bytedance.tiktok.fragment.RecommendFragment"
+        android:label="@string/title_recommend"
+        tools:layout="@layout/fragment_recommend" />
+
+    <fragment
+        android:id="@+id/navigation_collect"
+        android:name="com.bytedance.tiktok.fragment.FansFragment"
+        android:label="@string/title_collect"
+        tools:layout="@layout/fragment_fans" />
+
+    <fragment
+        android:id="@+id/navigation_msg"
+        android:name="com.bytedance.tiktok.fragment.WorkFragment"
+        android:label="@string/title_msg"
+        tools:layout="@layout/fragment_work" />
+
+    <fragment
+        android:id="@+id/navigation_personal"
+        android:name="com.bytedance.tiktok.fragment.PersonalHomeFragment"
+        android:label="@string/title_personal"
+        tools:layout="@layout/fragment_personal_home" />
+
+</navigation>

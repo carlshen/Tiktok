@@ -78,9 +78,9 @@ public class RecommendFragment extends BaseFragment {
         super.onResume();
 
         //返回时，推荐页面可见，则继续播放视频
-        if (MainActivity.curMainPage == 0 && MainFragment.curPage == 1) {
-            videoView.start();
-        }
+//        if (MainActivity.curMainPage == 0 && MainFragment.curPage == 1) {
+//            videoView.start();
+//        }
     }
 
     @Override

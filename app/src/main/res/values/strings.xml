@@ -1,5 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">抖音短视频</string>
+    <string name="title_home">首页</string>
+    <string name="title_recommend">推荐</string>
+    <string name="title_collect">好友</string>
+    <string name="title_msg">消息</string>
+    <string name="title_personal">个人</string>
 
     <!-- 点赞选中 -->
     <string name="icon_like_fill">&#xe60d;</string>
