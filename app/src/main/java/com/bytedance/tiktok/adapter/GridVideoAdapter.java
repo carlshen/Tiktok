@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.activity.PlayListActivity;
 import com.bytedance.tiktok.base.BaseRvAdapter;
@@ -16,8 +18,6 @@ import com.bytedance.tiktok.bean.VideoBean;
 import com.bytedance.tiktok.view.IconFontTextView;
 
 import java.util.List;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * create by libo
@@ -51,19 +51,17 @@ public class GridVideoAdapter extends BaseRvAdapter<VideoBean, GridVideoAdapter.
     }
 
     public class GridVideoViewHolder extends BaseRvViewHolder {
-        @BindView(R.id.iv_cover)
         ImageView ivCover;
-        @BindView(R.id.tv_content)
         TextView tvContent;
-        @BindView(R.id.tv_distance)
         IconFontTextView tvDistance;
-        @BindView(R.id.iv_head)
         ImageView ivHead;
 
         public GridVideoViewHolder(View itemView) {
             super(itemView);
-
-            ButterKnife.bind(this, itemView);
+            ivCover = itemView.findViewById(R.id.iv_cover);
+            ivHead = itemView.findViewById(R.id.iv_head);
+            tvDistance = itemView.findViewById(R.id.tv_distance);
+            tvContent = itemView.findViewById(R.id.tv_content);
         }
     }
 }

@@ -5,15 +5,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.base.BaseRvAdapter;
 import com.bytedance.tiktok.base.BaseRvViewHolder;
 import com.bytedance.tiktok.bean.CommentBean;
 import com.bytedance.tiktok.utils.NumUtils;
 import com.bytedance.tiktok.view.CircleImageView;
+
 import java.util.List;
-import butterknife.BindView;
 
 /**
  * create by libo
@@ -42,17 +44,17 @@ public class CommentAdapter extends BaseRvAdapter<CommentBean, CommentAdapter.Co
     }
 
     public class CommentViewHolder extends BaseRvViewHolder {
-        @BindView(R.id.iv_head)
         CircleImageView ivHead;
-        @BindView(R.id.tv_nickname)
         TextView tvNickname;
-        @BindView(R.id.tv_content)
         TextView tvContent;
-        @BindView(R.id.tv_likecount)
         TextView tvLikecount;
 
         public CommentViewHolder(View itemView) {
             super(itemView);
+            ivHead = itemView.findViewById(R.id.iv_head);
+            tvNickname = itemView.findViewById(R.id.tv_nickname);
+            tvContent = itemView.findViewById(R.id.tv_content);
+            tvLikecount = itemView.findViewById(R.id.tv_likecount);
         }
     }
 }

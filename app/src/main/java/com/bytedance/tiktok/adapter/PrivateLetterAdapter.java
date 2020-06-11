@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.base.BaseRvAdapter;
 import com.bytedance.tiktok.base.BaseRvViewHolder;
@@ -15,10 +16,8 @@ import com.bytedance.tiktok.bean.VideoBean;
 
 import java.util.List;
 
-import butterknife.BindView;
-
 /**
- * create by libo
+ * create by carl shen
  * create on 2020-05-25
  * description
  */
@@ -42,13 +41,13 @@ public class PrivateLetterAdapter extends BaseRvAdapter<VideoBean.UserBean, Priv
     }
 
     public class PrivateLetterViewHolder extends BaseRvViewHolder {
-        @BindView(R.id.iv_head)
         ImageView ivHead;
-        @BindView(R.id.tv_nickname)
         TextView tvName;
 
         public PrivateLetterViewHolder(View itemView) {
             super(itemView);
+            ivHead = itemView.findViewById(R.id.iv_head);
+            tvName = itemView.findViewById(R.id.tv_nickname);
         }
     }
 }

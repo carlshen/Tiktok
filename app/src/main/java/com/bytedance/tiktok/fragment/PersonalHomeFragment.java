@@ -70,7 +70,6 @@ public class PersonalHomeFragment extends BaseFragment {
     private ArrayList<Fragment> fragments = new ArrayList<>();
     private CommPagerAdapter pagerAdapter;
     private VideoBean.UserBean cUserBean = new VideoBean.UserBean();
-//    private Subscription subscription;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
@@ -110,13 +109,7 @@ public class PersonalHomeFragment extends BaseFragment {
 
         setAppbarLayoutPercent();
 
-//        ivReturn.setOnClickListener(this);
-//        ivHead.setOnClickListener(this);
-//        ivBg.setOnClickListener(this);
-//        llFocus.setOnClickListener(this);
-//        llFans.setOnClickListener(this);
-
-        setTabLayout();
+//        setTabLayout();
         setUserInfo();
     }
 
@@ -168,9 +161,12 @@ public class PersonalHomeFragment extends BaseFragment {
 
                 ivBg.setImageResource(curUserBean.getUserBean().getHead());
                 ivHead.setImageResource(curUserBean.getUserBean().getHead());
-                tvNickname.setText(curUserBean.getUserBean().getNickName());
-                tvSign.setText(curUserBean.getUserBean().getSign());
-                tvTitle.setText(curUserBean.getUserBean().getNickName());
+//                tvNickname.setText(curUserBean.getUserBean().getNickName());
+//                tvSign.setText(curUserBean.getUserBean().getSign());
+//                tvTitle.setText(curUserBean.getUserBean().getNickName());
+                homeViewModel.getNickName().setValue(curUserBean.getUserBean().getNickName());
+                homeViewModel.getSign().setValue(curUserBean.getUserBean().getSign());
+                homeViewModel.getTitle().setValue(curUserBean.getUserBean().getNickName());
 
                 String subCount = NumUtils.numberFilter(curUserBean.getUserBean().getSubCount());
                 String focusCount = NumUtils.numberFilter(curUserBean.getUserBean().getFocusCount());
@@ -191,18 +187,6 @@ public class PersonalHomeFragment extends BaseFragment {
                 }
 
                 setTabLayout();
-//                String imagePath1 = CurUserBean.getData().getCompany_list().get(0).getImage();
-//                homeViewModel.getImageURL1().setValue(imagePath1);
-//
-//                String imagePath2 = homeDataResult.getData().getAd_list().get(0).getImage();
-//                homeViewModel.getImageURL2().setValue(imagePath2);
-//
-//                String linkPath1 = homeDataResult.getData().getCompany_list().get(0).getLink();
-//                homeViewModel.getLinkURL1().setValue(linkPath1);
-//
-//                String linkPath2 = homeDataResult.getData().getAd_list().get(0).getLink();
-//                homeViewModel.getLinkURL2().setValue(linkPath2);
-
             }
         });
 
@@ -260,33 +244,4 @@ public class PersonalHomeFragment extends BaseFragment {
         }
     }
 
-//    @Override
-//    public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.iv_return:
-//                RxBus.getDefault().post(new MainPageChangeEvent(0));
-//                break;
-//            case R.id.iv_head:
-//                transitionAnim(ivHead, curUserBean.getHead());
-//                break;
-//            case R.id.iv_bg:
-//
-//                break;
-//            case R.id.ll_focus:
-//                startActivity(new Intent(getActivity(), FocusActivity.class));
-//                break;
-//            case R.id.ll_fans:
-//                startActivity(new Intent(getActivity(), FocusActivity.class));
-//                break;
-//        }
-//    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-//
-//        if (subscription != null) {
-//            subscription.unsubscribe();
-//        }
-    }
 }

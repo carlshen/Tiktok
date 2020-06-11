@@ -18,18 +18,13 @@ import com.bytedance.tiktok.bean.DataCreate;
 
 import java.util.ArrayList;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 /**
- * create by libo
+ * create by carl shen
  * create on 2020-05-24
  * description 评论弹框
  */
 public class CommentDialog extends BaseBottomSheetDialog {
-    @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
-    @BindView(R.id.tv_title)
     TextView tvTitle;
     private CommentAdapter commentAdapter;
     private ArrayList<CommentBean> datas = new ArrayList<>();
@@ -41,7 +36,8 @@ public class CommentDialog extends BaseBottomSheetDialog {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dialog_comment, container);
-        ButterKnife.bind(this, view);
+        recyclerView = view.findViewById(R.id.recyclerview);
+        tvTitle = view.findViewById(R.id.tv_title);
 
         init();
 

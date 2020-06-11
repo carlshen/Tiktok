@@ -11,48 +11,48 @@ import com.xiangxue.common.utils.Utils;
 
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
-    private MutableLiveData<String> imageURL1;
-    private MutableLiveData<String> imageURL2;
-    private MutableLiveData<String> linkURL1;
-    private MutableLiveData<String> linkURL2;
+    private MutableLiveData<String> mNikeName;
+    private MutableLiveData<String> imageHead;
+    private MutableLiveData<String> imageBack;
+    private MutableLiveData<String> mSign;
+    private MutableLiveData<String> mTitle;
     private MutableLiveData<Drawable> placeHolder;
 
     public HomeViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("首页中心");
+        mNikeName = new MutableLiveData<>();
+        mNikeName.setValue("");
 
-        imageURL1 = new MutableLiveData<>();
-        imageURL1.setValue(null);
+        imageHead = new MutableLiveData<>();
+        imageHead.setValue(null);
 
-        imageURL2 = new MutableLiveData<>();
-        imageURL2.setValue(null);
+        imageBack = new MutableLiveData<>();
+        imageBack.setValue(null);
 
-        linkURL1 = new MutableLiveData<>();
-        linkURL2 = new MutableLiveData<>();
+        mSign = new MutableLiveData<>();
+        mTitle = new MutableLiveData<>();
 
         placeHolder = new MutableLiveData<>();
         placeHolder.setValue(Utils.getApp().getResources().getDrawable(R.drawable.pictures_no));
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public MutableLiveData<String> getNickName() {
+        return mNikeName;
     }
 
-    public MutableLiveData<String> getImageURL1() {
-        return imageURL1;
+    public MutableLiveData<String> getImageHead() {
+        return imageHead;
     }
 
-    public MutableLiveData<String> getImageURL2() {
-        return imageURL2;
+    public MutableLiveData<String> getImageBack() {
+        return imageBack;
     }
 
-    public MutableLiveData<String> getLinkURL1() {
-        return linkURL1;
+    public MutableLiveData<String> getSign() {
+        return mSign;
     }
 
-    public MutableLiveData<String> getLinkURL2() {
-        return linkURL2;
+    public MutableLiveData<String> getTitle() {
+        return mTitle;
     }
 
     public MutableLiveData<Drawable> getPlaceHolder() {

@@ -5,14 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
+
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.base.BaseRvAdapter;
 import com.bytedance.tiktok.base.BaseRvViewHolder;
 import com.bytedance.tiktok.bean.VideoBean;
 import com.bytedance.tiktok.view.CircleImageView;
+
 import java.util.List;
-import butterknife.BindView;
 
 /**
  * create by libo
@@ -52,15 +54,15 @@ public class FansAdapter extends BaseRvAdapter<VideoBean.UserBean, FansAdapter.F
     }
 
     public class FansViewHolder extends BaseRvViewHolder {
-        @BindView(R.id.iv_head)
         CircleImageView ivHead;
-        @BindView(R.id.tv_nickname)
         TextView tvNickname;
-        @BindView(R.id.tv_focus)
         TextView tvFocus;
 
         public FansViewHolder(View itemView) {
             super(itemView);
+            ivHead = itemView.findViewById(R.id.iv_head);
+            tvNickname = itemView.findViewById(R.id.tv_nickname);
+            tvFocus = itemView.findViewById(R.id.tv_focus);
         }
     }
 }

@@ -10,6 +10,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.airbnb.lottie.LottieAnimationView;
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.bean.VideoBean;
@@ -17,45 +18,29 @@ import com.bytedance.tiktok.utils.AutoLinkHerfManager;
 import com.bytedance.tiktok.utils.NumUtils;
 import com.bytedance.tiktok.utils.OnVideoControllerListener;
 import com.bytedance.tiktok.utils.autolinktextview.AutoLinkTextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import static android.view.animation.Animation.INFINITE;
 
 /**
- * create by libo
+ * create by carl shen
  * create on 2020-05-20
  * description
  */
 public class ControllerView extends RelativeLayout implements View.OnClickListener {
-    @BindView(R.id.tv_content)
     AutoLinkTextView autoLinkTextView;
-    @BindView(R.id.iv_head)
     CircleImageView ivHead;
-    @BindView(R.id.lottie_anim)
     LottieAnimationView animationView;
-    @BindView(R.id.rl_like)
     RelativeLayout rlLike;
-    @BindView(R.id.iv_comment)
     IconFontTextView ivComment;
-    @BindView(R.id.iv_share)
     IconFontTextView ivShare;
-    @BindView(R.id.iv_record)
     ImageView ivRecord;
-    @BindView(R.id.rl_record)
     RelativeLayout rlRecord;
-    @BindView(R.id.tv_nickname)
     TextView tvNickname;
-    @BindView(R.id.iv_head_anim)
     CircleImageView ivHeadAnim;
-    @BindView(R.id.iv_like)
     IconFontTextView ivLike;
-    @BindView(R.id.tv_likecount)
     TextView tvLikecount;
-    @BindView(R.id.tv_commentcount)
     TextView tvCommentcount;
-    @BindView(R.id.tv_sharecount)
     TextView tvSharecount;
-    @BindView(R.id.iv_focus)
     ImageView ivFocus;
     private OnVideoControllerListener listener;
     private VideoBean videoData;
@@ -68,7 +53,21 @@ public class ControllerView extends RelativeLayout implements View.OnClickListen
 
     private void init() {
         View rootView = LayoutInflater.from(getContext()).inflate(R.layout.view_controller, this);
-        ButterKnife.bind(this, rootView);
+        autoLinkTextView = rootView.findViewById(R.id.tv_content);
+        ivHead = rootView.findViewById(R.id.iv_head);
+        animationView = rootView.findViewById(R.id.lottie_anim);
+        rlLike = rootView.findViewById(R.id.rl_like);
+        ivComment = rootView.findViewById(R.id.iv_comment);
+        ivShare = rootView.findViewById(R.id.iv_share);
+        ivRecord = rootView.findViewById(R.id.iv_record);
+        rlRecord = rootView.findViewById(R.id.rl_record);
+        tvNickname = rootView.findViewById(R.id.tv_nickname);
+        ivHeadAnim = rootView.findViewById(R.id.iv_head_anim);
+        ivLike = rootView.findViewById(R.id.iv_like);
+        tvLikecount = rootView.findViewById(R.id.tv_likecount);
+        tvCommentcount = rootView.findViewById(R.id.tv_commentcount);
+        tvSharecount = rootView.findViewById(R.id.tv_sharecount);
+        ivFocus = rootView.findViewById(R.id.iv_focus);
 
         ivHead.setOnClickListener(this);
         ivComment.setOnClickListener(this);

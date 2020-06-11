@@ -7,16 +7,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.base.BaseRvAdapter;
 import com.bytedance.tiktok.base.BaseRvViewHolder;
 import com.bytedance.tiktok.bean.ShareBean;
+
 import java.util.List;
 
-import butterknife.BindView;
-
 /**
- * create by libo
+ * create by carl shen
  * create on 2020-05-25
  * description
  */
@@ -41,15 +41,15 @@ public class ShareAdapter extends BaseRvAdapter<ShareBean, ShareAdapter.ShareVie
     }
 
     public class ShareViewHolder extends BaseRvViewHolder {
-        @BindView(R.id.tv_icon)
         TextView tvIcon;
-        @BindView(R.id.tv_text)
         TextView tvText;
-        @BindView(R.id.view_bg)
         View viewBg;
 
         public ShareViewHolder(View itemView) {
             super(itemView);
+            tvIcon = itemView.findViewById(R.id.tv_icon);
+            tvText = itemView.findViewById(R.id.tv_text);
+            viewBg = itemView.findViewById(R.id.view_bg);
         }
     }
 }

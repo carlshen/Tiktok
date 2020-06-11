@@ -4,28 +4,27 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.adapter.PrivateLetterAdapter;
 import com.bytedance.tiktok.adapter.ShareAdapter;
 import com.bytedance.tiktok.bean.DataCreate;
 import com.bytedance.tiktok.bean.ShareBean;
+
 import java.util.ArrayList;
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
- * create by libo
+ * create by carl shen
  * create on 2020-05-25
  * description 分享弹框
  */
 public class ShareDialog extends BaseBottomSheetDialog {
-    @BindView(R.id.rv_private_letter)
     RecyclerView rvPrivateLetter;
-    @BindView(R.id.rv_share)
     RecyclerView rvShare;
     private PrivateLetterAdapter privateLetterAdapter;
     private ShareAdapter shareAdapter;
@@ -36,7 +35,8 @@ public class ShareDialog extends BaseBottomSheetDialog {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.dialog_share, container);
-        ButterKnife.bind(this, view);
+        rvPrivateLetter = view.findViewById(R.id.rv_private_letter);
+        rvShare = view.findViewById(R.id.rv_share);
         init();
 
         return view;
