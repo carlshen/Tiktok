@@ -14,10 +14,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.bytedance.tiktok.R;
 import com.bytedance.tiktok.activity.PlayListActivity;
 import com.bytedance.tiktok.adapter.VideoAdapter;
-import com.bytedance.tiktok.bean.CurUserBean;
 import com.bytedance.tiktok.bean.DataCreate;
-import com.bytedance.tiktok.bean.MainPageChangeEvent;
-import com.bytedance.tiktok.bean.PauseVideoEvent;
 import com.bytedance.tiktok.databinding.FragmentRecommendBinding;
 import com.bytedance.tiktok.project.BaseFragment;
 import com.bytedance.tiktok.utils.OnVideoControllerListener;
@@ -28,8 +25,6 @@ import com.bytedance.tiktok.view.LikeView;
 import com.bytedance.tiktok.view.ShareDialog;
 import com.bytedance.tiktok.view.viewpagerlayoutmanager.OnViewPagerListener;
 import com.bytedance.tiktok.view.viewpagerlayoutmanager.ViewPagerLayoutManager;
-
-import rx.functions.Action1;
 
 /**
  * create by carl shen

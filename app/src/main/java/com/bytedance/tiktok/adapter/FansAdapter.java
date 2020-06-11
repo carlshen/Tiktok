@@ -17,7 +17,7 @@ import com.bytedance.tiktok.view.CircleImageView;
 import java.util.List;
 
 /**
- * create by libo
+ * create by carl shen
  * create on 2020-05-24
  * description
  */

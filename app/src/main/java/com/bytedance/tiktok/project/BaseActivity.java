@@ -28,7 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         // 给工具类初始化
         // BarUtils.setStatusBarColor(this, Color.RED);
         // BarUtils.setStatusBarLightMode(this, true);
-        BarUtils.setStatusBarVisibility(this, false); // 隐藏 状态栏
+        BarUtils.setStatusBarVisibility(this, true); // 隐藏 状态栏
 
         mSharedViewModel = getAppViewModelProvider().get(ProjectViewModel.class);
 
